@@ -1,9 +1,13 @@
 package com.juaracoding.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +26,10 @@ public class KeberangkatanModel {
 	private int harga;
 	private String kelas;
 	private String tanggal;
-	private long idJurusan;
-	private String noPolisi;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "idJurusan",referencedColumnName = "id")
+	private JurusanModel idJurusan;
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "noPolisi",referencedColumnName = "noPolisi")
+	private BusModel noPolisi;
 }

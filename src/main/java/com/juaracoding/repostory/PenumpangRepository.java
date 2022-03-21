@@ -6,4 +6,5 @@ import com.juaracoding.model.PenumpangModel;
 
 public interface PenumpangRepository extends JpaRepository<PenumpangModel, String>{
 	PenumpangModel findByNik(String nik);
+	PenumpangModel findByUsername(String username);
 }

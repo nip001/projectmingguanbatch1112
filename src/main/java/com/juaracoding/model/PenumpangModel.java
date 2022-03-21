@@ -23,6 +23,8 @@ public class PenumpangModel {
 	private String nik;
 	private String nama;
 	private String telepon;
+	private String username;
+	private String password;
 	
 //	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
