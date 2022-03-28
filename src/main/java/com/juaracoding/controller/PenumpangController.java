@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +24,18 @@ public class PenumpangController {
 	PenumpangRepository penumpangRepository;
 	
 	@GetMapping("/daftar")
-	private void daftar() {
-
+	private String daftar(Model model) {
+		model.addAttribute("objekPenumpang", new PenumpangModel());
+		return "formpenumpangbaru";
 	}
+	
+	@PostMapping("/daftar")
+	private String daftarPenumpang(@ModelAttribute PenumpangModel model) {
+		penumpangRepository.save(model);
+		String nik = model.getNik();
+		return "redirect:/penumpang/datalogin?nik="+nik;
+	}
+	
 
 	@GetMapping("/loginpenumpang")
 	private String loginPenumpang() {
