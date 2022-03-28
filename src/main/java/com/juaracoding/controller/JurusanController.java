@@ -23,4 +23,5 @@ public class JurusanController {
 		jurusanRepository.saveAll(model);
 		return "data berhasil ditambahkan";
 	}
+	
 }
