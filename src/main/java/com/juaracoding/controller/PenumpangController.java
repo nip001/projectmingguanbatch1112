@@ -19,6 +19,11 @@ public class PenumpangController {
 	@Autowired
 	PenumpangRepository penumpangRepository;
 	
+	@GetMapping("/daftar")
+	private void daftar() {
+
+	}
+	
 	@GetMapping("/loginpenumpang")
 	private void loginPenumpang() {
 
