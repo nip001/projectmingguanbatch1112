@@ -23,9 +23,13 @@ public class PenumpangController {
 	private void daftar() {
 
 	}
-	
+
 	@GetMapping("/loginpenumpang")
 	private void loginPenumpang() {
+
+	}
+	@GetMapping("/loginpenumpanssg")
+	private void loginPenumpangss() {
 
 	}
 }
