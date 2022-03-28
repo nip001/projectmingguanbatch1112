@@ -24,4 +24,8 @@ public class PenumpangController {
 
 	}
 	
+	@GetMapping("/loginpenumpang")
+	private void loginPenumpang() {
+
+	}
 }
