@@ -3,68 +3,21 @@ package com.juaracoding.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.juaracoding.config.JwtTokenUtil;
 import com.juaracoding.model.PenumpangModel;
 import com.juaracoding.repostory.PenumpangRepository;
-import com.juaracoding.service.JwtPenumpangDetailsService;
 
 @RestController
 @RequestMapping("/penumpang")
 public class PenumpangController {
-	@Autowired
-	PasswordEncoder pEncoder;
 	
 	@Autowired
 	PenumpangRepository penumpangRepository;
 	
-	@Autowired
-	JwtPenumpangDetailsService jwtPenumpangDetailsService;
 	
-	@Autowired
-	AuthenticationManager authManager;
 	
-	@Autowired
-	JwtTokenUtil jwtTokenUtil;
-	
-	@PostMapping("/registrasi")
-	private ResponseEntity<String> saveCustomer(@RequestBody PenumpangModel penumpang) {
-		penumpang.setPassword(pEncoder.encode(penumpang.getPassword()));
-		penumpangRepository.save(penumpang);
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body("Berhasil di buat");
-	}
-	
-	@PostMapping("/login")
-	private ResponseEntity<?> login(@RequestBody PenumpangModel penumpangModel) throws Exception {
-		authenticate(penumpangModel.getUsername(),penumpangModel.getPassword());
-		
-		final UserDetails userDetails = jwtPenumpangDetailsService
-				.loadUserByUsername(penumpangModel.getUsername());
-		
-		final String  token = jwtTokenUtil.generateToken(userDetails);
-		return ResponseEntity.ok(token);
-	}
-	
-	private void authenticate(String username,String password) throws Exception  {
-		try {
-			authManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-		} catch (DisabledException error) {
-			//User disabled
-			throw new Exception("USER_DISABLED",error);
-		} catch (BadCredentialsException error) {
-			//invalid credentials
-			throw new Exception("INVALID_CREDENTIALS",error);
-		}
-	}
 }
