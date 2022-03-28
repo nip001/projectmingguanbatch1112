@@ -61,13 +61,13 @@ public class BusController {
 		}
 	}
 	
-	@GetMapping("/findKeberangkatan")
-	private List<CustomGetKeberangkatan> findByKeberangkatan(
-			@RequestParam("terminal") String terminal,
-			@RequestParam("tanggal") String tanggal) {
-		return keberangkatanRepository.getKeberangkatan(terminal, tanggal);
-	}
-	
+//	@GetMapping("/findKeberangkatan")
+//	private List<CustomGetKeberangkatan> findByKeberangkatan(
+//			@RequestParam("terminal") String terminal,
+//			@RequestParam("tanggal") String tanggal) {
+//		return keberangkatanRepository.getKeberangkatan(terminal, tanggal);
+//	}
+//	
 	
 	@PostMapping("/booking")
 	private ResponseEntity<String> booking(@RequestBody BookingModel booking){

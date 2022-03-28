@@ -52,4 +52,6 @@ public class PenumpangController {
 			return "kenihilan";
 		}
 	}
+	
+
 }
